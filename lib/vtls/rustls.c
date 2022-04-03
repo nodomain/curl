@@ -428,7 +428,7 @@ cr_set_negotiated_alpn(struct Curl_easy *data, struct connectdata *conn,
     infof(data, "ALPN, negotiated an unrecognized protocol");
   }
 
-  Curl_multiuse_state(data, conn->negnpn == CURL_HTTP_VERSION_2 ?
+  Curl_multiuse_state(data, conn->alpn == CURL_HTTP_VERSION_2 ?
                       BUNDLE_MULTIPLEX : BUNDLE_NO_MULTIUSE);
 }
 

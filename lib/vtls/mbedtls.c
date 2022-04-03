@@ -827,13 +827,13 @@ mbed_connect_step2(struct Curl_easy *data, struct connectdata *conn,
 #endif
         if(!strncmp(next_protocol, ALPN_HTTP_1_1, ALPN_HTTP_1_1_LENGTH) &&
            !next_protocol[ALPN_HTTP_1_1_LENGTH]) {
-          conn->negnpn = CURL_HTTP_VERSION_1_1;
+          conn->alpn = CURL_HTTP_VERSION_1_1;
         }
     }
     else {
       infof(data, VTLS_INFOF_NO_ALPN);
     }
-    Curl_multiuse_state(data, conn->negnpn == CURL_HTTP_VERSION_2 ?
+    Curl_multiuse_state(data, conn->alpn == CURL_HTTP_VERSION_2 ?
                         BUNDLE_MULTIPLEX : BUNDLE_NO_MULTIUSE);
   }
 #endif
