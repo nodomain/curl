@@ -871,6 +871,9 @@ static void HandshakeCallback(PRFileDesc *sock, void *arg)
       infof(data, VTLS_INFOF_ALPN_ACCEPTED_LEN_1STR, buflen, buf);
       break;
 #endif
+    default:
+      /* ignore SSL_NEXT_PROTO_NEGOTIATED */
+      break;
     }
 
 #ifdef USE_HTTP2
