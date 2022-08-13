@@ -821,7 +821,7 @@ mbed_connect_step2(struct Curl_easy *data, struct connectdata *conn,
 #ifdef USE_HTTP2
       if(!strncmp(next_protocol, ALPN_H2, ALPN_H2_LENGTH) &&
          !next_protocol[ALPN_H2_LENGTH]) {
-        conn->negnpn = CURL_HTTP_VERSION_2;
+        conn->alpn = CURL_HTTP_VERSION_2;
       }
       else
 #endif
