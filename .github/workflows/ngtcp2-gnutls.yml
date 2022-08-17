@@ -37,7 +37,7 @@ jobs:
       name: 'install prereqs and impacket'
 
     - run: |
-        git clone https://github.com/gnutls/gnutls.git
+        git clone --depth=1 https://github.com/gnutls/gnutls.git
         cd gnutls
         autoreconf -fi
         ./configure ${{ matrix.build.gnutls-configure }} --prefix=$HOME/all
@@ -45,7 +45,7 @@ jobs:
       name: 'install gnutls'
 
     - run: |
-        git clone https://github.com/ngtcp2/nghttp3
+        git clone --depth=1 https://github.com/ngtcp2/nghttp3
         cd nghttp3
         autoreconf -fi
         ./configure --prefix=$HOME/all --enable-lib-only
@@ -53,7 +53,7 @@ jobs:
       name: 'install nghttp3'
 
     - run: |
-        git clone https://github.com/ngtcp2/ngtcp2
+        git clone --depth=1 https://github.com/ngtcp2/ngtcp2
         cd ngtcp2
         autoreconf -fi
         ./configure PKG_CONFIG_PATH=$HOME/all/lib/pkgconfig LDFLAGS="-Wl,-rpath,$HOME/all/lib" --prefix=$HOME/all --enable-lib-only --with-gnutls=$HOME/all
