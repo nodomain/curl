@@ -39,8 +39,7 @@ jobs:
     - run: |
         git clone --depth=1 -b 3.7.7 https://github.com/gnutls/gnutls.git
         cd gnutls
-        mkdir -p src/gl/m4
-        autoreconf -fi
+        ./bootstrap
         ./configure ${{ matrix.build.gnutls-configure }} --prefix=$HOME/all
         make && make install
       name: 'install gnutls'
