@@ -32,7 +32,7 @@ jobs:
     steps:
     - run: |
         sudo apt-get update
-        sudo apt-get install libtool autoconf automake pkg-config stunnel4 ${{ matrix.build.install }}
+        sudo apt-get install libtool autoconf automake pkg-config stunnel4 ${{ matrix.build.install }} autopoint gettext
         sudo python3 -m pip install impacket
       name: 'install prereqs and impacket'
 
