@@ -39,7 +39,7 @@ jobs:
     - run: |
         git clone --depth=1 https://gitlab.com/gnutls/nettle.git
         cd nettle
-        ./bootstrap
+        ./.bootstrap
         ./configure LDFLAGS="-Wl,-rpath,$HOME/all/lib" ${{ matrix.build.nettle-configure }} --prefix=$HOME/all --disable-documentation
         make && make install
       name: 'install nettle'
