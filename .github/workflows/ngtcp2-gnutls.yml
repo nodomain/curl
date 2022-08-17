@@ -27,7 +27,7 @@ jobs:
         - name: gnutls
           install:
           configure: LDFLAGS="-Wl,-rpath,$HOME/all/lib" --with-gnutls=$HOME/all --enable-debug
-          gnutls-configure: --with-included-libtasn1 --with-included-unistring --disable-guile --disable-doc
+          gnutls-configure: --with-included-libtasn1 --with-included-unistring --disable-guile --disable-doc --disable-tests
 
     steps:
     - run: |
@@ -39,6 +39,7 @@ jobs:
     - run: |
         git clone --depth=1 -b 3.7.7 https://github.com/gnutls/gnutls.git
         cd gnutls
+        mkdir -p src/gl/m4
         autoreconf -fi
         ./configure ${{ matrix.build.gnutls-configure }} --prefix=$HOME/all
         make && make install
