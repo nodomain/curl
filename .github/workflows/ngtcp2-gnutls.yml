@@ -40,7 +40,7 @@ jobs:
         git clone --depth=1 https://gitlab.com/gnutls/nettle.git
         cd nettle
         ./.bootstrap
-        ./configure LDFLAGS="-Wl,-rpath,$HOME/all/lib" ${{ matrix.build.nettle-configure }} --prefix=$HOME/all --disable-documentation
+        ./configure LDFLAGS="-Wl,-rpath,$HOME/all/lib64" ${{ matrix.build.nettle-configure }} --prefix=$HOME/all --disable-documentation
         make && make install
       name: 'install nettle'
 
@@ -48,7 +48,8 @@ jobs:
         git clone --depth=1 -b 3.7.7 https://github.com/gnutls/gnutls.git
         cd gnutls
         ./bootstrap
-        ./configure PKG_CONFIG_PATH=$HOME/all/lib/pkgconfig LDFLAGS="-Wl,-rpath,$HOME/all/lib" --prefix=$HOME/all ${{ matrix.build.gnutls-configure }}
+        find $HOME/all -ls
+        ./configure PKG_CONFIG_PATH=$HOME/all/lib64/pkgconfig LDFLAGS="-Wl,-rpath,$HOME/all/lib" --prefix=$HOME/all ${{ matrix.build.gnutls-configure }}
         make && make install
       name: 'install gnutls'
 
