@@ -37,7 +37,7 @@ jobs:
       name: 'install prereqs and impacket'
 
     - run: |
-        git clone --depth=1 https://github.com/gnutls/gnutls.git
+        git clone --depth=1 -b 3.7.7 https://github.com/gnutls/gnutls.git
         cd gnutls
         autoreconf -fi
         ./configure ${{ matrix.build.gnutls-configure }} --prefix=$HOME/all
