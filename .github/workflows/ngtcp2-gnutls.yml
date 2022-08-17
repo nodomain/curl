@@ -32,15 +32,23 @@ jobs:
     steps:
     - run: |
         sudo apt-get update
-        sudo apt-get install libtool autoconf automake pkg-config stunnel4 ${{ matrix.build.install }} python3 nettle-dev libp11-kit-dev libtspi-dev libunistring-dev guile-2.2-dev libtasn1-bin libtasn1-6-dev libidn2-0-dev gawk gperf libtss2-dev dns-root-data bison gtk-doc-tools texinfo texlive texlive-extra-utils autopoint libnettle8
+        sudo apt-get install libtool autoconf automake pkg-config stunnel4 ${{ matrix.build.install }} python3 nettle-dev libp11-kit-dev libtspi-dev libunistring-dev guile-2.2-dev libtasn1-bin libtasn1-6-dev libidn2-0-dev gawk gperf libtss2-dev dns-root-data bison gtk-doc-tools texinfo texlive texlive-extra-utils autopoint
         sudo python3 -m pip install impacket
       name: 'install prereqs and impacket'
+
+    - run: |
+        git clone --depth=1 https://gitlab.com/gnutls/nettle.git
+        cd nettle
+        ./bootstrap
+        ./configure LDFLAGS="-Wl,-rpath,$HOME/all/lib" ${{ matrix.build.nettle-configure }} --prefix=$HOME/all --disable-documentation
+        make && make install
+      name: 'install nettle'
 
     - run: |
         git clone --depth=1 -b 3.7.7 https://github.com/gnutls/gnutls.git
         cd gnutls
         ./bootstrap
-        ./configure ${{ matrix.build.gnutls-configure }} --prefix=$HOME/all
+        ./configure PKG_CONFIG_PATH=$HOME/all/lib/pkgconfig LDFLAGS="-Wl,-rpath,$HOME/all/lib" --prefix=$HOME/all ${{ matrix.build.gnutls-configure }}
         make && make install
       name: 'install gnutls'
 
