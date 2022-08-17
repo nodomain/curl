@@ -32,7 +32,7 @@ jobs:
     steps:
     - run: |
         sudo apt-get update
-        sudo apt-get install libtool autoconf automake pkg-config stunnel4 ${{ matrix.build.install }} python3 nettle-dev libp11-kit-dev libtspi-dev libunistring-dev guile-2.2-dev libtasn1-bin libtasn1-6-dev libidn2-0-dev gawk gperf libtss2-dev dns-root-data bison gtk-doc-tools texinfo texlive texlive-extra-utils
+        sudo apt-get install libtool autoconf automake pkg-config stunnel4 ${{ matrix.build.install }} python3 nettle-dev libp11-kit-dev libtspi-dev libunistring-dev guile-2.2-dev libtasn1-bin libtasn1-6-dev libidn2-0-dev gawk gperf libtss2-dev dns-root-data bison gtk-doc-tools texinfo texlive texlive-extra-utils autopoint
         sudo python3 -m pip install impacket
       name: 'install prereqs and impacket'
 
