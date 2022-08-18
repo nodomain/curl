@@ -35,7 +35,7 @@ The new function calls:
 
  `curl_ws_poll()` - NOT IMPLEMENTED YET
 
- `curl_ws_meta()` - NOT IMPLEMENTED YET
+ `curl_ws_meta()` - return websockets metadata within a write callback
 
 ## Max frame size
 
