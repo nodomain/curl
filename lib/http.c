@@ -4040,7 +4040,7 @@ CURLcode Curl_http_readwrite_headers(struct Curl_easy *data,
           /* Switching Protocols */
           if(k->upgr101 == UPGR101_H2) {
             /* Switching to HTTP/2 */
-            infof(data, "Switching to HTTP/2");
+            infof(data, "Received 101, Switching to HTTP/2");
             k->upgr101 = UPGR101_RECEIVED;
 
             /* we'll get more headers (HTTP/2 response) */
