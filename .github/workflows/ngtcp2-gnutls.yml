@@ -50,7 +50,7 @@ jobs:
         ./bootstrap
         find $HOME/all -ls
         ./configure PKG_CONFIG_PATH=$HOME/all/lib64/pkgconfig LDFLAGS="-Wl,-rpath,$HOME/all/lib" --prefix=$HOME/all ${{ matrix.build.gnutls-configure }}
-        make && make install
+        make V=1 && make install
       name: 'install gnutls'
 
     - run: |
