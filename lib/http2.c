@@ -2086,7 +2086,7 @@ CURLcode Curl_http2_switched(struct Curl_easy *data,
   conn->recv[FIRSTSOCKET] = http2_recv;
   conn->send[FIRSTSOCKET] = http2_send;
 
-  if(data->req.upgr101 == UPGR101_H2) {
+  if(data->req.upgr101 == UPGR101_RECEIVED) {
     /* stream 1 is opened implicitly on upgrade */
     stream->stream_id = 1;
     /* queue SETTINGS frame (again) */
