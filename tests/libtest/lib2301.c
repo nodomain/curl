@@ -92,8 +92,9 @@ static void websocket(CURL *curl)
 #endif
 
 static size_t writecb(unsigned char *buffer,
-                      size_t size, size_t nitems, CURL *easy)
+                      size_t size, size_t nitems, void *p)
 {
+  CURL *easy = p;
   size_t i;
   size_t sent;
   unsigned char pong[] = {
