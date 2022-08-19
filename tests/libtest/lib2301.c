@@ -91,7 +91,7 @@ static void websocket(CURL *curl)
 
 #endif
 
-static size_t writecb(unsigned char *buffer,
+static size_t writecb(char *buffer,
                       size_t size, size_t nitems, void *p)
 {
   CURL *easy = p;
