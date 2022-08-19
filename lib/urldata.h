@@ -53,8 +53,13 @@
 #define PORT_GOPHER 70
 #define PORT_MQTT 1883
 
+#ifdef USE_WEBSOCKETS
 #define CURLPROTO_WS     (1<<30)
-#define CURLPROTO_WSS    (1L<<31)
+#define CURLPROTO_WSS    (1LL<<31)
+#else
+#define CURLPROTO_WS 0
+#define CURLPROTO_WSS 0
+#endif
 
 #define DICT_MATCH "/MATCH:"
 #define DICT_MATCH2 "/M:"
