@@ -50,6 +50,7 @@ environment:
         TESTING: OFF
         SHARED: ON
         DISABLED_TESTS: ""
+        WEBSOCKETS: ON
       - APPVEYOR_BUILD_WORKER_IMAGE: "Visual Studio 2022"
         BUILD_SYSTEM: CMake
         PRJ_GEN: "Visual Studio 17 2022"
@@ -268,6 +269,7 @@ build_script:
         -DHTTP_ONLY=%HTTP_ONLY%
         -DBUILD_SHARED_LIBS=%SHARED%
         -DBUILD_TESTING=%TESTING%
+        -DENABLE_WEBSOCKETS=%WEBSOCKETS%
         -DCURL_WERROR=ON
         -DENABLE_DEBUG=ON
         -DENABLE_UNICODE=%ENABLE_UNICODE%
