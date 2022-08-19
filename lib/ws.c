@@ -194,15 +194,17 @@ static CURLcode ws_decode(struct Curl_easy *data,
   }
 
   plen = Curl_dyn_len(&wsp->buf);
-  if(plen < 2)
+  if(plen < 2) {
     /* the smallest possible frame is two bytes */
+    infof(data, "WS: plen == %u, EAGAIN", (int)plen);
     return CURLE_AGAIN;
+  }
 
   p = Curl_dyn_uptr(&wsp->buf);
 
   fin = p[0] & WSBIT_FIN;
   opcode = p[0] & WSBIT_OPCODE_MASK;
-  infof(data, "WS: received FIN bit %u", (int)fin);
+  infof(data, "WS:%d received FIN bit %u", __LINE__, (int)fin);
   *flags = 0;
   switch(opcode) {
   case WSBIT_OPCODE_CONT:
@@ -239,8 +241,10 @@ static CURLcode ws_decode(struct Curl_easy *data,
   }
   payloadssize = p[1];
   if(payloadssize == 126) {
-    if(plen < 4)
+    if(plen < 4) {
+      infof(data, "WS:%d plen == %u, EAGAIN", __LINE__, (int)plen);
       return CURLE_AGAIN; /* not enough data available */
+    }
     payloadssize = (p[2] << 8) | p[3];
     dataindex += 2;
   }
@@ -250,10 +254,10 @@ static CURLcode ws_decode(struct Curl_easy *data,
   }
 
   total = dataindex + payloadssize;
-  if(total > ilen) {
+  if(total > plen) {
     /* not enough data in buffer yet */
-    /* infof(data, "WS: decoded %u bytes, expected %u",
-       (int)total, (int)ilen); */
+    infof(data, "WS:%d plen == %u (%u), EAGAIN", __LINE__, (int)plen,
+          (int)total);
     return CURLE_AGAIN;
   }
 
